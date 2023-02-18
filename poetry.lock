@@ -34,6 +34,18 @@ python-versions = ">=3.7"
 graph = ["objgraph (>=1.7.2)"]
 
 [[package]]
+name = "greenlet"
+version = "2.0.2"
+description = "Lightweight in-process concurrent programming"
+category = "main"
+optional = false
+python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*"
+
+[package.extras]
+docs = ["sphinx", "docutils (<0.18)"]
+test = ["objgraph", "psutil"]
+
+[[package]]
 name = "isort"
 version = "5.12.0"
 description = "A Python utility / library to sort Python imports."
@@ -102,6 +114,41 @@ spelling = ["pyenchant (>=3.2,<4.0)"]
 testutils = ["gitpython (>3)"]
 
 [[package]]
+name = "sqlalchemy"
+version = "2.0.3"
+description = "Database Abstraction Library"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+greenlet = {version = "!=0.4.17", markers = "platform_machine == \"aarch64\" or platform_machine == \"ppc64le\" or platform_machine == \"x86_64\" or platform_machine == \"amd64\" or platform_machine == \"AMD64\" or platform_machine == \"win32\" or platform_machine == \"WIN32\""}
+typing-extensions = ">=4.2.0"
+
+[package.extras]
+aiomysql = ["greenlet (!=0.4.17)", "aiomysql"]
+aiosqlite = ["greenlet (!=0.4.17)", "aiosqlite", "typing-extensions (!=3.10.0.1)"]
+asyncio = ["greenlet (!=0.4.17)"]
+asyncmy = ["greenlet (!=0.4.17)", "asyncmy (>=0.2.3,!=0.2.4,!=0.2.6)"]
+mariadb_connector = ["mariadb (>=1.0.1,!=1.1.2,!=1.1.5)"]
+mssql = ["pyodbc"]
+mssql_pymssql = ["pymssql"]
+mssql_pyodbc = ["pyodbc"]
+mypy = ["mypy (>=0.910)"]
+mysql = ["mysqlclient (>=1.4.0)"]
+mysql_connector = ["mysql-connector-python"]
+oracle = ["cx-oracle (>=7)"]
+oracle_oracledb = ["oracledb (>=1.0.1)"]
+postgresql = ["psycopg2 (>=2.7)"]
+postgresql_asyncpg = ["greenlet (!=0.4.17)", "asyncpg"]
+postgresql_pg8000 = ["pg8000 (>=1.29.1)"]
+postgresql_psycopg = ["psycopg (>=3.0.7)"]
+postgresql_psycopg2binary = ["psycopg2-binary"]
+postgresql_psycopg2cffi = ["psycopg2cffi"]
+pymysql = ["pymysql"]
+sqlcipher = ["sqlcipher3-binary"]
+
+[[package]]
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
@@ -136,17 +183,19 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "57130f9231d1cd51f6b8e91840673c94b531a519691580a5ad349e89a2b6bd62"
+content-hash = "622f766bbd9280c9e64d62b0f846eda58785c01e55cb2329ca798c3fa56d3117"
 
 [metadata.files]
 astroid = []
 colorama = []
 dill = []
+greenlet = []
 isort = []
 lazy-object-proxy = []
 mccabe = []
 platformdirs = []
 pylint = []
+sqlalchemy = []
 tomli = [
     {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
     {file = "tomli-2.0.1.tar.gz", hash = "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"},
