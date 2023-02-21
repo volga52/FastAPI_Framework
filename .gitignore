@@ -1,9 +1,8 @@
 .idea
 __pycache__/
 db.sqlite3
+*db.sqlite*
 media
 .venv
 *.private
 setting/.env
-temp
-ideal
