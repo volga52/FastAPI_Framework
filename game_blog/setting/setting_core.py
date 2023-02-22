@@ -1,8 +1,11 @@
+"""Модуль содержит механизм извлечения конфиденциальных данных из файла .env"""
 import pathlib
-from pydantic import BaseSettings, SecretStr, SecretBytes
+
+from pydantic import BaseSettings, SecretBytes
 
 
 class Setting(BaseSettings):
+    """Класс организации данных"""
     secret_key: SecretBytes
 
     db_user: str
