@@ -7,8 +7,8 @@ from game_blog.apps.mainapp.routes import router
 
 from game_blog.db_core import engine
 
-apps.users.models.Base.metadata.create_all(bind=engine)
-apps.posts.models.Base.metadata.create_all(bind=engine)
+# apps.users.models.Base.metadata.create_all(bind=engine)
+# apps.posts.models.Base.metadata.create_all(bind=engine)
 
 
 def create_app(debug=True):
