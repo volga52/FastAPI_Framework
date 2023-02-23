@@ -3,9 +3,9 @@ from typing import List, Optional   # Типы данных для аннота�
 from fastapi import Request
 from sqlalchemy.orm import Session
 
-# from game_blog.core.hashing import Hasher
-# from game_blog.core.requests_framework import PostRequest
 from game_blog.apps.authapp.models import User
+from game_blog.core.hashing import Hasher
+from game_blog.core.requests_framework import PostRequest
 
 
 class UserForm:
@@ -32,7 +32,7 @@ class UserForm:
 
 
 class UserCreationForm(UserForm):
-    """Класс создания поьзователя"""
+    """Класс обработки формы создания поьзователя"""
     def __init__(self, request: Request):
         super().__init__(request)
         self.password: Optional[str] = None
@@ -65,3 +65,38 @@ class UserCreationForm(UserForm):
         user = db.query(User).filter(User.email == self.email).first()
         if user:
             self.errors.append(f"User with email {self.email} has already")
+
+
+class UserLoginForm(UserForm):
+    """Класс обработки формы ввод логина и пароля"""
+    def __init__(self, request: Request):
+        super().__init__(request)
+        self.password: Optional[str] = None
+        self.user: Optional[str] = None
+
+    async def load_data(self):
+        data = await self.request.body()    # Получаемые данные в байтах
+        data = PostRequest.parse_body_json(data)
+        self.username = data.get('username')
+        self.password = data.get('password')
+
+    async def is_valid(self, db: Session):
+
+        if not all(self.username, self.password):
+            self.errors.append('Please input data')
+        else:
+            user = db.query(User).filter(
+                User.username == self.username).first()
+            self.user = user
+            if not user:
+                self.errors.append(f'No this user with '
+                                   f'username: "{self.username}"')
+            else:
+                verified = Hasher.verify_password(self.password,
+                                                  user.hashed_password)
+                if not verified:
+                    self.errors.append('Not correct password')
+        if not self.errors:
+            return True
+
+        return False
