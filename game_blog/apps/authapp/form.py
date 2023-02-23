@@ -75,7 +75,7 @@ class UserLoginForm(UserForm):
         self.user: Optional[str] = None
 
     async def load_data(self):
-        data = await self.request.body()    # Получаемые данные в байтах
+        data: bytes = await self.request.body()    # Получаемые данные в байтах
         data = PostRequest.parse_body_json(data)
         self.username = data.get('username')
         self.password = data.get('password')
@@ -100,3 +100,33 @@ class UserLoginForm(UserForm):
             return True
 
         return False
+
+
+class UserUpdateForm(UserForm):
+    """Класс обработки формы изменение данных пользователя"""
+    def __init__(self, request: Request):
+        super().__init__(request)
+        self.old_name: Optional[str] = None
+        self.email: Optional[str] = None
+        self.user: Optional[str] = None
+
+    async def load_data(self):
+        data: bytes = await self.request.body()
+        data: dict = PostRequest.parse_body_json(data)
+        self.username = data.get('username')
+        self.email = data.get('email')
+        self.old_name = data.get('old')
+
+    async def is_valid(self, db: Session):
+        await self.validate_username(db)
+        await self.validate_email(db)
+
+        if not self.errors:
+            return True
+        return False
+
+    async def validate_email(self, db: Session):
+        """Проверка email на повтор"""
+        user = db.query(User).filter(User.email == self.email).first()
+        if user:
+            self.errors.append(f"User with email {self.email} has already")
