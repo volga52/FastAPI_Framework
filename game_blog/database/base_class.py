@@ -1,24 +1,11 @@
-from typing import Generator
-
-from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker
-
-from game_blog.setting.config import SQLALCHEMY_DATABASE_URL
+from sqlalchemy.ext.declarative import declarative_base, declared_attr
 
 
-# Объект подключения
-engine = create_engine(SQLALCHEMY_DATABASE_URL,
-                       connect_args={"check_same_thread": False})
-db_session = scoped_session(
-    sessionmaker(autocommit=False, autoflush=False, bind=engine))
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+class CustomBase:
+    # Generate __tablename__ automatically
+    @declared_attr
+    def __tablename__(cls):
+        return cls.__name__.lower()
 
 
-def get_db() -> Generator:
-    """Функция создает объект сессии"""
-    try:
-        # Создание объекта сессии
-        db = SessionLocal()
-        yield db
-    finally:
-        db.close()
+Base = declarative_base(cls=CustomBase)
