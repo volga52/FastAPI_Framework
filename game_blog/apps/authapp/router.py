@@ -7,13 +7,12 @@ from fastapi.requests import Request
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 
-from game_blog.apps.authapp.form import UserCreationForm, UserLoginForm, \
-    UserUpdateForm
-from game_blog.apps.authapp.schemas import UserCreate
-from game_blog.setting.config import TemplateResponse
-from game_blog.database.repository.users import create_new_user
-from game_blog.database.session import get_db
-from game_blog.apps.authapp.models import User
+from apps.authapp.form import UserCreationForm, UserLoginForm, UserUpdateForm
+from apps.authapp.schemas import UserCreate
+from setting.config import TemplateResponse
+from database.repository.users import create_new_user
+from database.session import get_db
+from apps.authapp.models import User
 
 # Объект регистратора маршрутов
 user_router = APIRouter()
@@ -22,7 +21,7 @@ user_router = APIRouter()
 @user_router.post('/register/')
 @user_router.get('/register/')
 async def register(request: Request, db: Session = Depends(get_db)):
-    print(db.query(User).all())
+    # print(db.query(User).all())
     if request.method == 'GET':
         # Переходим на страницу ...
         return TemplateResponse("auth/register.html", {"request": request})

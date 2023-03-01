@@ -3,7 +3,7 @@ from typing import Generator
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-from game_blog.setting.config import SQLALCHEMY_DATABASE_URL
+from setting.config import SQLALCHEMY_DATABASE_URL
 
 
 # Объект подключения

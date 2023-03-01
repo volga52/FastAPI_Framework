@@ -6,8 +6,8 @@ from sqlalchemy import Boolean, Column, String, DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy_utils import EmailType, UUIDType
 
-from game_blog.apps.posts.models import Post
-from game_blog.database.base_class import Base
+from apps.posts.models import Post
+from database.base_class import Base
 
 
 class User(Base):

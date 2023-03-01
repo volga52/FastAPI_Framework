@@ -5,7 +5,7 @@ from sqlalchemy import Boolean, Column, DateTime, String
 from sqlalchemy.orm import relationship
 from sqlalchemy_utils import EmailType, UUIDType
 
-from game_blog.db_core import Base
+from database.base_class import Base
 
 
 class User(Base):

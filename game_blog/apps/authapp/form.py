@@ -3,9 +3,9 @@ from typing import List, Optional   # Типы данных для аннота�
 from fastapi import Request
 from sqlalchemy.orm import Session
 
-from game_blog.apps.authapp.models import User
-from game_blog.core.hashing import Hasher
-from game_blog.core.requests_framework import PostRequest
+from apps.authapp.models import User
+from core.hashing import Hasher
+from core.requests_framework import PostRequest
 
 
 class UserForm:

@@ -5,11 +5,11 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy_utils import UUIDType
 
-from game_blog.db_core import Base
+from database.base_class import Base
 
 
 class Post(Base):
-    """Модель для БД Pjst"""
+    """Модель БД для Post"""
     __tablename__ = "posts"
 
     uid = Column(UUIDType, primary_key=True)

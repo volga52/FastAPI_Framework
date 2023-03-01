@@ -2,7 +2,7 @@ import os
 
 from fastapi.templating import Jinja2Templates
 
-from game_blog.setting.setting_core import Setting
+from setting.setting_core import Setting
 
 
 config = Setting()
@@ -21,7 +21,7 @@ SQLALCHEMY_DATABASE_URL = ''.join(['sqlite:///./', DB_NAME])
 ALEMBIC_SQLALCHEMY_DATABASE_URL = ''.join(['sqlite:///./', DB_NAME])
 
 # Экземпляр класса конструктора для создания шаблонизаторов
-templates = Jinja2Templates(directory="game_blog/templatest")
+templates = Jinja2Templates(directory="templatest")
 
 TemplateResponse = templates.TemplateResponse
 

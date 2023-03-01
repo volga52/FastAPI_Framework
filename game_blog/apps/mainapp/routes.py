@@ -1,10 +1,11 @@
 """Регистрация маршрутов"""
-from fastapi import APIRouter, Request
+from fastapi import APIRouter
+from fastapi.requests import Request
 # from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 
-from game_blog.apps.authapp.router import user_router
-from game_blog.setting.config import TemplateResponse
+from apps.authapp.router import user_router
+from setting.config import TemplateResponse
 
 
 # Экземпляр класса конструктора для создания шаблонизаторов
