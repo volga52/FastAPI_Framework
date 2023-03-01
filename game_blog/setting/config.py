@@ -20,7 +20,8 @@ DB_HOST = config.db_host
 SQLALCHEMY_DATABASE_URL = ''.join(['sqlite:///./', DB_NAME])
 ALEMBIC_SQLALCHEMY_DATABASE_URL = ''.join(['sqlite:///./', DB_NAME])
 
-templates = Jinja2Templates(directory="templatest")
+# Экземпляр класса конструктора для создания шаблонизаторов
+templates = Jinja2Templates(directory="game_blog/templatest")
 
 TemplateResponse = templates.TemplateResponse
 
