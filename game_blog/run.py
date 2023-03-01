@@ -1,6 +1,6 @@
 """Модуль запуска проекта"""
 from uvicorn import run
-from game_blog import create_app
+from game_blog.main import create_app
 
 
 app = create_app()
