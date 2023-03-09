@@ -82,7 +82,7 @@ class UserLoginForm(UserForm):
 
     async def is_valid(self, db: Session):
 
-        if not all(self.username, self.password):
+        if not all([self.username, self.password]):
             self.errors.append('Please input data')
         else:
             user = db.query(User).filter(
