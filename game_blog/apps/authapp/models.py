@@ -21,7 +21,7 @@ class User(Base):
 
     uid = Column(UUIDType, default=uuid4, primary_key=True)
     create_date = Column(DateTime, default=datetime.datetime.utcnow)
-    email =Column(EmailType)
+    email = Column(EmailType)
     username = Column(String, unique=True)
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
@@ -36,7 +36,7 @@ class User(Base):
                               'time_sending': time.time(),
                               'user_uid': str(self.uid)}).encode('utf-8')
         secret = SECRET_KEY
-        return jws.serialize_compact(protected, payload, secret).\
+        return jws.serialize_compact(protected, payload, secret). \
             decode('utf-8')
 
     @staticmethod
@@ -45,7 +45,7 @@ class User(Base):
         data = jws.deserialize_compact(token, SECRET_KEY)
         payload_json = json.loads(data['payload'])
 
-        time_left = payload_json['time_sending'] + payload_json['expires_sec']\
+        time_left = payload_json['time_sending'] + payload_json['expires_sec'] \
                     - time.time()
         print(time_left)
 
@@ -60,4 +60,4 @@ class Token(Base):
     token = Column(UUIDType, unique=True, nullable=True,
                    index=True, default=uuid4)
     expires = Column(DateTime)
-    user_id = Column(UUIDType, ForeignKey('user.uid'))
+    user_uid = Column(UUIDType, ForeignKey('user.uid'))

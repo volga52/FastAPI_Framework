@@ -23,8 +23,8 @@ def upgrade() -> None:
     sa.Column('uid', sqlalchemy_utils.types.uuid.UUIDType(), nullable=False),
     sa.Column('token', sqlalchemy_utils.types.uuid.UUIDType(), nullable=True),
     sa.Column('expires', sa.DateTime(), nullable=True),
-    sa.Column('user_id', sqlalchemy_utils.types.uuid.UUIDType(), nullable=True),
-    sa.ForeignKeyConstraint(['user_id'], ['user.uid'], ),
+    sa.Column('user_uid', sqlalchemy_utils.types.uuid.UUIDType(), nullable=True),
+    sa.ForeignKeyConstraint(['user_uid'], ['user.uid'], ),
     sa.PrimaryKeyConstraint('uid')
     )
     op.create_index(op.f('ix_token_token'), 'token', ['token'], unique=True)

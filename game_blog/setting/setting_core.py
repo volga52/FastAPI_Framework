@@ -1,7 +1,7 @@
 """Модуль содержит механизм извлечения конфиденциальных данных из файла .env"""
 import pathlib
 
-from pydantic import BaseSettings, SecretBytes
+from pydantic import BaseSettings, SecretBytes, SecretStr
 
 
 class Setting(BaseSettings):
@@ -13,6 +13,10 @@ class Setting(BaseSettings):
     db_pass: str
     db_name: str
     db_host: str
+
+    mail_username: str
+    mail_password: SecretStr
+    mail_address: str
 
     class Config:
         env_file = f"{pathlib.Path(__file__).resolve().parent}/.env"
