@@ -2,8 +2,8 @@ import hashlib
 import random
 import string
 
-from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2AuthorizationCodeBearer
+# from fastapi import Depends, HTTPException, status
+# from fastapi.security import OAuth2AuthorizationCodeBearer
 from fastapi_mail import MessageSchema, FastMail
 from sqlalchemy.orm import Session
 from sqlalchemy import and_

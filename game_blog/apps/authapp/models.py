@@ -40,7 +40,7 @@ class User(Base):
             decode('utf-8')
 
     @staticmethod
-    def get_pay_from_reset_token(token):
+    def get_payload_from_reset_token(token):
         jws = JsonWebSignature(['HS256'])
         data = jws.deserialize_compact(token, SECRET_KEY)
         payload_json = json.loads(data['payload'])
