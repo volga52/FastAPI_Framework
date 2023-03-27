@@ -13,7 +13,7 @@ from apps.authapp.schemas import UserCreate
 from setting.config import TemplateResponse
 # from database.repository.users import create_new_user
 from database.session import get_db
-from apps.authapp.models import User
+from apps.authapp.models import User, Token
 from .utils import get_user_by_email, create_user, validate_password, \
     create_user_token, send_message, do_hash_password
 
@@ -28,7 +28,7 @@ async def register(request: Request, db: Session = Depends(get_db)):
     request.name = 'request'
     if request.method == 'GET':
         # Переходим на страницу ...
-        return TemplateResponse("auth/register.html", {"request": request})
+        return TemplateResponse("auth/register.jinja2", {"request": request})
     # Соответственно post запрос ... работаем с пришедшими данными
     else:
         form = await request.form()
@@ -99,8 +99,9 @@ async def login_page(request: Request, db: Session = Depends(get_db)):
 
     if not user or not validate_password(password=form.get('password'),
                                          hashed_password=user.hashed_password):
-        return TemplateResponse('auth/login.jinja2', {'request': request,
-                                                       'error': 'Incorrect email or password'})
+        return TemplateResponse(
+            'auth/login.jinja2',
+            {'request': request, 'error': 'Incorrect email or password'})
 
     response = responses.RedirectResponse('/?msg=Successfully-Logged')
 
@@ -109,13 +110,15 @@ async def login_page(request: Request, db: Session = Depends(get_db)):
     return response
 
 
-@user_router.get('/logout/{username}')
-async def logout(username, db: Session = Depends(get_db)):
-
-    user = db.query(User).filter_by(username=username).first()
-    user.token = ''
+@user_router.get('/logout/')
+async def logout(request: Request, db: Session = Depends(get_db)):
+    token = request.cookies.get('token')
+    token_db = db.query(Token).filter(Token.token == token).first()
+    db.delete(token_db)
     db.commit()
     response = responses.RedirectResponse('/')
+    response.delete_cookie('token')
+
     return response
 
 
