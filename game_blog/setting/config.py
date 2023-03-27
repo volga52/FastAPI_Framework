@@ -30,7 +30,7 @@ SQLALCHEMY_DATABASE_URL = ''.join(['sqlite:///./', DB_NAME])
 ALEMBIC_SQLALCHEMY_DATABASE_URL = ''.join(['sqlite:///./', DB_NAME])
 
 # Экземпляр класса конструктора для создания шаблонизаторов
-templates = Jinja2Templates(directory="templatest")
+templates = Jinja2Templates(directory="templates")
 
 TemplateResponse = templates.TemplateResponse
 

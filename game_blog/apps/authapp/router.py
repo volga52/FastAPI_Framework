@@ -7,7 +7,8 @@ from fastapi.requests import Request
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 
-from apps.authapp.form import UserCreationForm, UserLoginForm, UserUpdateForm
+# from apps.authapp.form import UserCreationForm, UserLoginForm, UserUpdateForm
+from apps.authapp.form import UserUpdateForm
 from apps.authapp.schemas import UserCreate
 from setting.config import TemplateResponse
 # from database.repository.users import create_new_user
