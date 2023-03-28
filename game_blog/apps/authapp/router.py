@@ -47,7 +47,7 @@ async def register(request: Request, db: Session = Depends(get_db)):
                                               'email has already'})
         else:
             new_user = await create_user(user, db)
-            response = responses.RedirectResponse('/login/')
+            response = responses.RedirectResponse('/login')
             response.set_cookie('logged', 'true')
             return response
 
