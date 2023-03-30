@@ -55,7 +55,7 @@ class PostForm:
 
 class AddPostForm(PostForm):
     """Форма для создания post-а"""
-    async def create_form(self, db: Session):
+    async def create_post(self, db: Session):
         image_path = await self.load_photo_from_form()
         if image_path:
             post = Post(title=self.title, image=image_path,
