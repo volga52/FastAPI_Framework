@@ -6,8 +6,8 @@ from fastapi.responses import RedirectResponse
 from sqlalchemy.exc import StatementError
 from sqlalchemy.orm import Session
 
-from apps.postsapp.models import Post
 from apps.postsapp.forms import AddPostForm, UpdatePostForm
+from apps.postsapp.models import Post
 from core.decorators import login_required
 from core.requests_framework import setup_user_dict
 from database.session import get_db
@@ -39,7 +39,7 @@ async def create_post(request: Request, db: Session = Depends(get_db)):
     if request.method == 'POST':
         form = AddPostForm(request, context=response_dict)
 
-        is_created = await form.create_post()
+        is_created = await form.create_post(db)
         if is_created:
             response_dict.update({'success': True})
         else:

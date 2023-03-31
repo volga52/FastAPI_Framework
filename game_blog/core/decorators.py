@@ -16,7 +16,7 @@ def login_required(func):
 
         if request is None or token is None or not await get_user_by_token(
                 token, db):
-            return RedirectResponse('/login/')
+            return RedirectResponse('/login')
 
         return await func(*args, **kwargs)
     return wrapper

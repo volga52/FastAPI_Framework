@@ -10,5 +10,7 @@ def create_app(debug=True):
     # mount - монтировать
     app.mount('/static',
               StaticFiles(directory='static'), name='static')
+    app.mount('/media',
+              StaticFiles(directory='media'), name='media')
     app.include_router(api_router)
     return app

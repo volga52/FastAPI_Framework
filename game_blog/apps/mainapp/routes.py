@@ -8,8 +8,9 @@ from sqlalchemy.orm import Session
 from apps.authapp.router import user_router
 from apps.authapp.utils import get_current_user
 
-from setting.config import TemplateResponse
+from apps.postsapp.routes import post_route
 from core.requests_framework import setup_user_dict
+from setting.config import TemplateResponse
 # from setting.decorators import login_required
 from database.session import get_db
 
@@ -19,6 +20,7 @@ from database.session import get_db
 
 api_router = APIRouter()  # Создание регистрации маршрутов
 api_router.include_router(user_router)
+api_router.include_router(post_route)
 
 
 # Применение маршрутизации

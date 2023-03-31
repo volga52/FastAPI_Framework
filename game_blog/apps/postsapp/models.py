@@ -1,5 +1,6 @@
 """Создание модели для сущности posts"""
 import datetime
+from uuid import uuid4
 
 from sqlalchemy import Column, ForeignKey
 from sqlalchemy import Boolean, String, DateTime, Text
@@ -12,7 +13,7 @@ from database.base_class import Base
 class Post(Base):
     """Модель БД для Post"""
 
-    uid = Column(UUIDType, primary_key=True)
+    uid = Column(UUIDType, default=uuid4, primary_key=True)
     created_date = Column(DateTime, default=datetime.datetime.utcnow)
     is_active = Column(Boolean, default=True)
     title = Column(String)
