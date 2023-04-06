@@ -12,8 +12,6 @@
       <list>
         <option value="$MODULE_DIR$/game_blog/apps/postsapp" />
         <option value="$MODULE_DIR$/game_blog/migration" />
-        <option value="$MODULE_DIR$/game_blog/templates" />
-        <option value="$MODULE_DIR$/game_blog/static" />
         <option value="$MODULE_DIR$/game_blog/media" />
       </list>
     </option>
