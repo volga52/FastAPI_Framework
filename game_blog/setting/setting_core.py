@@ -19,5 +19,7 @@ class Setting(BaseSettings):
     mail_address: str
 
     class Config:
-        env_file = f"{pathlib.Path(__file__).resolve().parent}/.env"
+        # env_file = f"{pathlib.Path(__file__).resolve().parent}/.env"
+        env_file = f"{pathlib.Path(__file__).resolve().parent.parent}/.env"
         env_file_encoding = 'utf-8'
+
