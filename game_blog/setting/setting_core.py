@@ -22,4 +22,3 @@ class Setting(BaseSettings):
         # env_file = f"{pathlib.Path(__file__).resolve().parent}/.env"
         env_file = f"{pathlib.Path(__file__).resolve().parent.parent}/.env"
         env_file_encoding = 'utf-8'
-
