@@ -20,5 +20,9 @@ class Setting(BaseSettings):
 
     class Config:
         # env_file = f"{pathlib.Path(__file__).resolve().parent}/.env"
-        env_file = f"{pathlib.Path(__file__).resolve().parent.parent}/.env"
+        # env_file = f"{pathlib.Path(__file__).resolve().parent.parent}/.env"
+        env_file = ["/etc/secrets/.env",
+                    f"{pathlib.Path(__file__).resolve().parent}/.env",
+                    f"{pathlib.Path(__file__).resolve().parent.parent}/.env"]
+
         env_file_encoding = 'utf-8'
